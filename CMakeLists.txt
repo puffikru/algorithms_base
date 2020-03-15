@@ -1,35 +1,28 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(Brown)
-
-#if ($ENV{TRAVIS_BUILD_NUMBER})
-#    project(Brown VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
-#else ($ENV{TRAVIS_BUILD_NUMBER})
-#    project(Brown VERSION 0.0.1)
-#endif ($ENV{TRAVIS_BUILD_NUMBER})
+project(algorithms)
 
 #find_package(Gtest COMPONENTS gtest gmock gtest_main REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 
-add_executable(Brown secondary_index/secondary_index.cpp)
+
 
 #set(SOURSE_FILES main.cpp courses_tests/basic_tests/basic_check.cpp)
 
-#add_subdirectory(hash_set)
-#add_subdirectory(point)
-#add_subdirectory(set_iterator)
-#add_subdirectory(courses_tests)
+add_subdirectory(4.7.1)
+add_subdirectory(4.7.2)
+add_subdirectory(4.7.3)
+add_subdirectory(4.7.4)
+add_subdirectory(4.7.5)
+add_subdirectory(4.7.6)
+add_subdirectory(4.7.7)
 
-#set(CPACK_GENERATOR DEB)
-#
-#set(CPACK_PACKAGE_VERSION_MAJOR "0")
-#set(CPACK_PACKAGE_VERSION_MINOR "0")
-#set(CPACK_PACKAGE_VERSION_PATCH "1")
-#
-#set(CPACK_PACKAGE_CONTACT igorbulakh1987@yandex.ru)
-#
-#set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-#
-#include(CPack)
+#add_subdirectory(
+#  "${CMAKE_CURRENT_SOURCE_DIR}/googletest"
+#  "googletest"
+#)
+#env CC=gcc-8 CXX=g++-8 cmake ..
+# Compile: g++ -std=c++17 -Wshadow -Wall -o "%e" "%f" -O2 -Wno-unused-result
+# Build:   g++ -std=c++17 -Wshadow-Wall -o "%e" "%f" -g -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG
