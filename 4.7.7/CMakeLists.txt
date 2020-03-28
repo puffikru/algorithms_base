@@ -1,13 +1,25 @@
+cmake_minimum_required(VERSION 3.15)
+
+project(best)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+
 add_subdirectory(
-  "../googletest"
-  "googletest"
+    "${CMAKE_CURRENT_SOURCE_DIR}/googletest"
+    "googletest"
 )
 
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest/include")
+
+# Main target
 add_executable(
   diamonds
   src/diamonds.cpp
+  src/diamonds.h
 )
 
+# Test target
 add_executable(
   tests
   test/tests.cpp
