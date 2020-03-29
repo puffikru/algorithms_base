@@ -1,0 +1,164 @@
+\documentclass[a4paper,12pt]{article} % добавить leqno в [] для нумерации слева
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\title{4.7.7}
+\author{Igor Bulakh}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+$$\frac{\sum v_i}{\sum w_i} - \frac{\sum v_j}{\sum w_j} > 0$$
+
+$$
+V_{big} := \sum v_i := V + v_a\quad
+W_{big} := \sum w_i := W + w_a\
+$$
+$$
+V_{small} := \sum v_j := V + v_b\quad
+W_{small} := \sum w_j := W + w_b\
+$$
+
+$$\frac{\sum v_i}{\sum w_i} - \frac{\sum v_j}{\sum w_j} > 0$$  multiply by $${\sum w_i} \cdot {\sum w_j}$$
+
+$$\sum v_i \cdot \sum w_j - \sum v_j \cdot \sum w_i > 0$$
+
+$$(V+v_i)(W+w_j) - (V + v_j)(W + w_i) > 0$$
+
+$$V W + V w_j + v_i W + v_i w_j - V W - V w_i - v_j W - v_j w_i > 0$$
+
+$$V(w_j - w_i) + W(v_i - v_j) + v_i w_j - v_j w_i > 0$$
+
+$$v_i w_j = v_i (w_j - w_i + w_i) = v_i (w_j - w_i) + v_i w_i$$
+
+$$V(w_j - w_i) + W(v_i - v_j) + v_i (w_j - w_i) + v_i w_i - v_j w_i > 0$$
+
+$$(w_j - w_i)(V + v_i) + W(v_i - v_j) + w_i(v_i - v_j) > 0$$
+
+$$(w_j - w_i)(V + v_i) + (v_i - v_j)(W + w_i) > 0$$
+
+$$(w_j - w_i)V_{big} + (v_i - v_j)W_{big} > 0$$
+
+\section{Code}
+
+\subsection{Input/Output}
+
+\textbf{Input:}
+\begin{lstlisting}
+6 2
+6792 19949
+22986 3872
+28903 6506
+2514 1990
+23158 5029
+2101 23700
+\end{lstlisting}
+\textbf{Output:}
+\begin{lstlisting}
+5.18414
+\end{lstlisting}
+
+\subsection{Algorithm}
+
+$\displaystyle \frac{\displaystyle \sum v_i}{\displaystyle \sum w_i} - \frac{\displaystyle \sum v_j}{\displaystyle \sum w_j} > 0$ \\
+\begin{flushleft}
+$V_{big} = 86455$ \\
+$W_{big} = 61046$ \\
+$V = 29778$ \\
+$W = 23821$ \\
+\vspace{5mm}
+\textbf{v and w devision results:}\newline \smallskip
+$v_1 / w_1 = 0.34046819$ \\
+$v_2 / w_2 = 5.93646694$ \\
+$v_3 / w_3 = 4.4425146$ \\
+$v_4 / w_4 = 1.26331658$ \\
+$v_5 / w_5 = 4.60489163$ \\
+$v_6 / w_6 = 0.08864979$ \\
+
+$\displaystyle \frac{\sum v_i}{\sum w_i} = \frac{29778}{23821} = 1.25007346$ \\
+\vspace{5mm}
+Теперь вместо $v_2$ и $w_2$ выбираем следующую по порядку пару. \smallskip
+$\sum v_j = 6792 + 28903 = 35695$ \\
+\smallskip
+$\sum w_j = 19949 + 6506 = 26455$ \\ \bigskip
+$\displaystyle \frac{\sum v_j}{\sum w_j} = \frac{35695}{26455} = 1.34927235$ \\
+\smallskip
+Проверяем: \\
+\smallskip
+$1.25007346 - 1.34927235 = -0.09919889$ \quad \\
+Следовательно этот элемент нам не подходит \\
+\bigskip
+Переходим к следующей итерации: \\
+$\sum v_j = 6792 + 2514 = 9306$ \\
+\smallskip
+$\sum w_j = 19949 + 1990 = 21939$ \\ \bigskip
+$\displaystyle \frac{\sum v_j}{\sum w_j} = \frac{9306}{21939} = 0.42417612$ \\
+\smallskip
+Проверяем: \\
+\smallskip
+$1.25007346 - 0.42417612 = 0.82589734 > 0$ \\
+\bigskip
+Считаем новое значение отношения $V$ к $W$ \\
+\smallskip
+$9306 / 21939$
+\end{flushleft}
+\vspace{1cm}
+
+
+
+
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+%
+% using namespace std;
+%
+% int C(int n, int k)
+% {
+%     if (k == 0 || k == n)
+%         return 1;
+%     return C(n - 1, k - 1) * n / k;
+% }
+%
+% int main()
+% {
+%     int n, k;
+%     cout << "Input n: ";
+%     cin >> n;
+%     cout << "Input k: ";
+%     cin >> k;
+%     cout << "test" << endl;
+%     return 0;
+% }
+% \end{lstlisting}
+%
+\end{document}
