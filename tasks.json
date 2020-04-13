@@ -1,0 +1,125 @@
+
+{
+    "tasks": [
+        // {
+        //     "type": "shell",
+        //     "label": "clang++ build active file",
+        //     "command": "/Users/bulahior/opt/miniconda3/bin/clang++",
+        //     "args": [
+        //         "-g",
+        //         "${file}",
+        //         "-o",
+        //         "${fileDirname}/${fileBasenameNoExtension}"
+        //     ],
+        //     "options": {
+        //         "cwd": "/Users/bulahigor/opt/miniconda3/bin"
+        //     },
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     }
+        // },
+        // {
+        //     "type": "shell",
+        //     "label": "g++ build active file",
+        //     "command": "/usr/bin/g++",
+        //     "args": [
+        //         "-g",
+        //         "${file}",
+        //         "-o",
+        //         "${fileDirname}/${fileBasenameNoExtension}"
+        //     ],
+        //     "options": {
+        //         "cwd": "/usr/bin"
+        //     },
+        //     "problemMatcher": [
+        //         "$gcc"
+        //     ]
+        // },
+        // {
+        //     "type": "shell",
+        //     "label": "run build",
+        //     "command": "/usr/bin/g++",
+        //     "args": [
+        //         "-g",
+        //         "${file}",
+        //         "-std=c++17",
+        //         "-Wshadow",
+        //         "-Wall",
+        //         "-o",
+        //         "${fileDirname}/run/test",
+        //         "-O2",
+        //         "-Wno-unused-result",
+        //         "-v"
+        //     ]
+        // },
+        // {
+        //     "label": "cmake build",
+        //     "type":"shell",
+        //     "command": "make",
+        //     "args": [
+        //         "-g",
+        //         "${file}",
+        //         "-std=c++17",
+        //         "-Wshadow",
+        //         "-Wall",
+        //         "-o",
+        //         "${workspaceFolder}/4.7.7/build/diamonds",
+        //         "-O2",
+        //         "-Wno-unused-result"
+        //     ],
+        //     "group": {
+        //       "kind": "build",
+        //       "isDefault": true
+        //     }
+        //   },
+        //   {
+        //       "label": "Debug",
+        //       "type": "shell",
+        //       "command": "/usr/bin/clang++",
+        //       "args": [
+        //         "-g",
+        //         "${file}",
+        //           "-std=c++17",
+        //           "-Wshadow",
+        //           "-Wall",
+        //            "-o",
+        //            "${workspaceFolder}/4.7.7/build/*", 
+        //            "-fsanitize=address",
+        //            "-fsanitize=undefined", 
+        //            "-D",
+        //            "_GLIBCXX_DEBUG",
+        //            "-v"
+        //       ],
+        //       "group": {
+        //         "kind": "test",
+        //         "isDefault": true
+        //       }
+        //   },
+        //   {
+        //     "label": "Cmake",
+        //     "type": "shell",
+        //     "command": "make diamonds",
+        //     "args": [
+        //       "-g",
+        //       "${file}",
+        //         "-std=c++17",
+        //         "-Wshadow",
+        //         "-Wall",
+        //          "-o",
+        //          "${workspaceFolder}", 
+        //          "-fsanitize=address",
+        //          "-fsanitize=undefined", 
+        //          "-D",
+        //          "_GLIBCXX_DEBUG",
+        //          "-v"
+        //     ],
+        //     "group": {
+        //       "kind": "test",
+        //       "isDefault": true
+        //     }
+        // }
+    ],
+    "version": "2.0.0",
+    
+}

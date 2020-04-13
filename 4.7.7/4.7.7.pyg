@@ -1,8 +1,0 @@
-  int main()
-  {
-      int n, k;
-      cin >> n;
-      cin >> k;
-      cin.get();
-      return 0;
-  }
