@@ -9,21 +9,33 @@
 
 class Solution {
 public:
-    int64_t SolutionCount(std::vector<int>& distances, int64_t max_dist) {
+    int64_t Count(int r, int l) {
+        return r - l;
+    }
+
+    int64_t SolutionCount(const std::vector<int>& distances, int64_t max_dist) {
         // LOG_DURATION("Solution");
         size_t l = 0;
-        int64_t res = 0;
+        int64_t res = distances[1] - distances[0];
+        
         int64_t count = 0;
+
         for (size_t r = 1; r < distances.size(); ++r) {
-            res = distances[r] - distances[l];
-            while (res > max_dist) {
-                count++;
-                res -= distances[l++];
+            if (r <= distances.size() - 2) {
+                res += (distances[r + 1] - distances[r]);
             }
+            // std::cout << "res: " << count << std::endl;
+                while (res > max_dist && l < r) {
+                    res -= (distances[l + 1] - distances[l]);
+                    // std::cout << "res: " << count << std::endl;
+                    l++;
+                    count++;
+                    // std::cout << "count: " << count << std::endl;
+                }
         }
         
         return count;
-
+/*
         // size_t l = 0;
         // int64_t cases = 0;
         // for (size_t r = distances.size() - 1; r > l; --r) {
@@ -66,10 +78,14 @@ public:
     //     }
     //     std::cout << "cases: " << cases << std::endl;
     //     return cases;
+    */
     }
 };
 
+// 20 23 25 30 31 35 40 50 150 151 152 153 10000
 
+
+/*
 void Test() {
     std::vector<int> v = {20, 23, 25, 30, 31, 35, 40, 50, 150, 151, 152, 153, 10000};
     int64_t x = 15;
@@ -78,6 +94,8 @@ void Test() {
     int64_t expected = 51;
     ASSERT_EQUAL(res, expected);
  }
+
+
 
 
  void SimpleTest() {
@@ -159,9 +177,7 @@ void Test() {
         std::cout << "NO, get= " << res << std::endl;
     }
  }
-
-
-
+*/
 
 int main() {
 
@@ -175,7 +191,8 @@ int main() {
     // std::cout << std::numeric_limits<long long>::max() << std::endl;
     int64_t n, r;
     std::cin >> n >> r;
-    std::vector<int> v(n);
+    std::vector<int> v;
+    v.reserve(n);
     for (int& i : v) {
         std::cin >> i;
     }
