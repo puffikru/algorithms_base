@@ -1,4 +1,5 @@
 #pragma once
+#include "color.h"
 
 #include <sstream>
 #include <stdexcept>
@@ -54,11 +55,14 @@ ostream& operator << (ostream& os, const map<K, V>& m) {
 
 template<class T, class U>
 void AssertEqual(const T& t, const U& u, const string& hint = {}) {
+	Color::Modifier red(Color::FG_RED);
+	Color::Modifier yel(Color::FG_YELLOW);
+	Color::Modifier def(Color::FG_DEFAULT);
 	if (!(t == u)) {
 		ostringstream os;
-		os << "Assertion failed: " << t << " != " << u;
+		os << red << "Assertion failed: " << t << " != " << u << def;
 		if (!hint.empty()) {
-			os << " hint: " << hint;
+			os << yel << " hint: " << hint << def;
 		}
 		throw runtime_error(os.str());
 	}
@@ -72,12 +76,15 @@ class TestRunner {
 public:
 	template <class TestFunc>
 	void RunTest(TestFunc func, const string& test_name) {
+		Color::Modifier red(Color::FG_RED);
+		Color::Modifier green(Color::FG_GREEN);
+		Color::Modifier def(Color::FG_DEFAULT);
 		try {
 			func();
-			cerr << test_name << " OK" << endl;
+			cerr << green << test_name << " OK" << def << endl;
 		} catch (exception& e) {
 			++fail_count;
-			cerr << test_name << " fail: " << e.what() << endl;
+			cerr << red << test_name << " fail: " << e.what() << def << endl;
 		} catch (...) {
 			++fail_count;
 			cerr << "Unknown exception caught" << endl;
@@ -86,7 +93,9 @@ public:
 	
 	~TestRunner() {
 		if (fail_count > 0) {
-			cerr << fail_count << " unit tests failed. Terminate" << endl;
+			Color::Modifier red(Color::FG_RED);
+			Color::Modifier def(Color::FG_DEFAULT);
+			cerr << red << fail_count << " unit tests failed. Terminate" << def << endl;
 			exit(1);
 		}
 	}
