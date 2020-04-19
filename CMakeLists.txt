@@ -27,6 +27,7 @@ add_subdirectory(5.2)
 add_subdirectory(5.3)
 add_subdirectory(5.4)
 add_subdirectory(5.6.1)
+add_subdirectory(5.6.2)
 
 #add_subdirectory(
 #  "${CMAKE_CURRENT_SOURCE_DIR}/googletest"
