@@ -138,6 +138,16 @@ void Test6() {
 }
 
 
+void Test7() {
+    string str = "0000";
+    int k = 0;
+    Solution s;
+    int res = s.CountSubstrings(str, k);
+    int expected = 9;
+    ASSERT_EQUAL(res, expected);
+}
+
+
 int main() {
     TestRunner tr;
     RUN_TEST(tr, Test1);
@@ -146,6 +156,7 @@ int main() {
     RUN_TEST(tr, Test4);
     RUN_TEST(tr, Test5);
     RUN_TEST(tr, Test6);
+    RUN_TEST(tr, Test7);
 
     // int k;
     // cin >> k;
