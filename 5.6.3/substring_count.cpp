@@ -4,78 +4,39 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <array>
+
 
 using namespace std;
+
+
 
 class Solution {
 public:
     int CountSubstrings(const string& s, int k) {
-        int count = 0;
-        int cnt_1 = 0;
-        for (size_t l = 0; l < s.size(); ++l) {
-            size_t r = l;
-            cnt_1 = 0;
-            while (r < s.size()) {
-                if (k > 0) {
-                    if (r == s.size() - 1) {
-                        if (cnt_1 == k) {
-                            count++;
-                        } else if (cnt_1 < k && s[r] == '1') {
-                            cnt_1++;
-                            count++;
-                        }
-                        break;
-                    }
-                }
-                if (s[l] == '1' && k > 0) {
-                    if (cnt_1 < k) {
-                        cnt_1++;
-                        count++;
-                        r++;
-                    }
-                }
-                if (s[r] == '1') {
-                    if (k > 0) {
-                        if (cnt_1 == k && r - 1 != l) {
-                            count++;
-                            break;
-                        } else if (cnt_1 == k && r - 1 == l) {
-                            break;
-                        } else if (cnt_1 < k) {
-                            cnt_1++;
-                            count++;
-                            r++;
-                        }
-                    } else {
-                        break;
-                    }
-                } else if (s[r] == '0') {
-                    if (k > 0) {
-                        if (r == s.size() - 1) {
-                            if (cnt_1 == k) {
-                                count++;
-                                break;
-                            } else {
-                                break;
-                            }
-                        }
-                        r++;
-                    } else {
-                        if (cnt_1 == 0) {
-                            cnt_1++;
-                        }
-                        count++;
-                        r++;
-                    }
-                } else if (s[r] == '1' && k == 0) {
-                    break;
-                }
+        int count_k = 0;
+        int res = 0;
+        int n = s.size();
+        int *sums = new int[n + 1]{};
+
+        sums[0] = 1;
+        for (size_t i = 0; i < s.size(); ++i) {
+            count_k += (s[i] - '0');
+            // cout << count_k << '\n';
+
+            if (count_k >= k) {
+                res += sums[count_k - k];
             }
+            sums[count_k]++;
         }
-        return count;
+        return res;
     }
 };
  
+// 0 1 0 0 1 0 0 1 0 1      15
+// sum[0] = 1
+// sum[1] = 2 // 10
+// sum[2] = 2 // 10 
 
 
 void Test1() {
@@ -93,7 +54,7 @@ void Test2() {
     int k = 1;
     Solution s;
     int res = s.CountSubstrings(str, k);
-    int expected = 10;
+    int expected = 12;
     ASSERT_EQUAL(res, expected);
 }
 
@@ -143,7 +104,17 @@ void Test7() {
     int k = 0;
     Solution s;
     int res = s.CountSubstrings(str, k);
-    int expected = 9;
+    int expected = 10;
+    ASSERT_EQUAL(res, expected);
+}
+
+
+void Test8() {
+    string str = "010110101";
+    int k = 2;
+    Solution s;
+    int res = s.CountSubstrings(str, k);
+    int expected = 10;
     ASSERT_EQUAL(res, expected);
 }
 
@@ -157,6 +128,7 @@ int main() {
     RUN_TEST(tr, Test5);
     RUN_TEST(tr, Test6);
     RUN_TEST(tr, Test7);
+    RUN_TEST(tr, Test8);
 
     // int k;
     // cin >> k;
