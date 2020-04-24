@@ -1,0 +1,53 @@
+\documentclass[a4paper,12pt]{article} % добавить leqno в [] для нумерации слева
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+\usepackage{listings}
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\title{Substrings with firquency of characters of another string}
+\author{Igor Bulakh}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Algorithm}
+
+\begin{flushleft}
+
+$\displaystyle S_1=adcdb$\newline
+$\displaystyle S_2=aaabbbccc$\\
+\bigskip
+1. Считаем кол-во повторений каждой буквы в строке $S_2$\\
+Получаем $\displaystyle \{a: 3, b: 3, c: 3\}$\\
+\bigskip
+2. Forloop $S_1...to...S_1.size$\\
+
+\bigskip
+
+\end{flushleft}
+\end{document}
