@@ -5,7 +5,6 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
-#include <array>
 
 
 using namespace std;
@@ -20,43 +19,65 @@ unordered_map<char, int64_t> CreateMap(const string& b) {
 }
 
 
+bool CheckCondition(unordered_map<char, int64_t>& s1, unordered_map<char, int64_t>& s2, const char& letter) {
+    if (s1.count(letter) > 0) {
+        if (s2[letter] <= s1[letter]) {
+            return true;
+        }
+    }
+    return false;
+}
+
 class Solution {
 public:
     int64_t CountSubstringsFromSecondArray(const string& a, const string& b) {
-        unordered_map<char, int> m;
-
-        for (size_t l = 0; l < b.size(); ++l) {
-            if (m.find(b[l]) == m.end()) {
-                m[b[l]] = 1;
+        size_t l = 0;
+        size_t r = 0;
+        int64_t result = 0;
+        unordered_map<char, int64_t> target = CreateMap(b);
+        unordered_map<char, int64_t> letters;
+        if (target.count(a[r]) > 0) {
+            letters[a[r]]++;
+        }
+        while (l <= r) {
+            if (CheckCondition(target, letters, a[r])) {
+                if (r == a.size() - 1) {
+                    if (l == r) {
+                        result++;
+                        break;
+                    } else {
+                        result += ((r - l + 2) * (r - l + 1)) / 2;
+                        break;
+                    }
+                } else {
+                    if (l == r && r != 0 && letters[a[r]] == 0) {
+                        letters[a[r]]++;
+                    }
+                    r++;
+                    letters[a[r]]++;
+                }
             } else {
-                m[b[l]]++;
+                if (r == a.size() - 1) {
+                    if (l == r) {
+                        break;
+                    } else {
+                        result += (r - l);
+                        letters[a[l]]--;
+                        l++;
+                    }
+                } else {
+                    if (l == r) {
+                        l++;
+                        r++;
+                    } else {
+                        result += (r - l);
+                        letters[a[l]]--;
+                        l++;
+                    }
+                }
             }
         }
-
-        for (auto it = m.begin(); it != m.end(); ++it) {
-            
-        }
-
-
-        // cout << m << '\n';
-/*
-        // int64_t res = 0;
-        // size_t count = 0;
-        // unordered_map<char, int64_t> m;
-        // unordered_map<char, int64_t> target = CreateMap(b);
-        // for (size_t l = 0; l < a.size(); ++l) {
-        //     size_t r = l;
-        //     while (r < a.size() && target.count(a[r]) > 0 && m[a[r]] < target[a[r]]) {
-        //         m[a[r]]++;
-        //         count++;
-        //         r++;
-        //     }
-        //     res += count;
-        //     m.clear();
-        //     count = 0;
-        // }
-        // return res;
-*/
+        return result;
     }
 };
 
@@ -222,8 +243,8 @@ void Test16() {
 
 
 int main() {
-    TestRunner tr;
-    RUN_TEST(tr, SimpleTest);
+    // TestRunner tr;
+    // RUN_TEST(tr, SimpleTest);
     // RUN_TEST(tr, Test2);
     // RUN_TEST(tr, Test3);
     // RUN_TEST(tr, Test4);
@@ -247,10 +268,10 @@ int main() {
     // #endif
 // g++ -std=c++17  -D TEST
 
-    // int n, m;
-    // cin >> n >> m;
-    // string a;
-    // string b;
+    int n, m;
+    cin >> n >> m;
+    string a;
+    string b;
 
     // for (int i = 0; i < n; ++i) {
     //     char temp;
@@ -264,8 +285,10 @@ int main() {
     //     b += temp;
     // }
 
-    // Solution s;
-    // cout << s.CountSubstringsFromSecondArray(a, b) << '\n';
+    cin >> a >> b;
+
+    Solution s;
+    cout << s.CountSubstringsFromSecondArray(a, b) << '\n';
 
     return 0;
 }
